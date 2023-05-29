@@ -15,11 +15,11 @@ const userSchema = new Schema(
         match: /.+\@.+\..+/ //regex that matches only email format
        },
        thoughts: {
-        type: ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Thought'
        },
        friends: {
-        type: ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
        }
     }
