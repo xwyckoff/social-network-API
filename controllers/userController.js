@@ -1,12 +1,11 @@
-const User = require('../models/User'); 
+const User = require('../models/User');
+const Thought = require('../models/Thought'); 
 
 //methods that will get all users, get a user by their ID, create a new user, update a user, and delete a user
 module.exports = {
     async getAllUsers(req, res) {
         try {
-            const users = await User.find({})
-            .populate('thoughts')
-            .populate('friends');
+            const users = await User.find({});
             res.json(users)
         } catch(err) {
             res.status(500).json(err);
@@ -15,6 +14,8 @@ module.exports = {
     async getUserById(req, res) {
         try {
             const user = await User.findOne({_id: req.params.id})
+            .populate('thoughts')
+            .populate('friends');
             if(!user) {
                 res.json('User does not exist with that ID');
             } 
