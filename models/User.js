@@ -6,7 +6,7 @@ const userSchema = new Schema(
         type: String,
         unique: true,
         required: true,
-        trimmed: true
+        trim: true
        },
        email: {
         type: String,
@@ -14,14 +14,14 @@ const userSchema = new Schema(
         required: true,
         match: /.+\@.+\..+/ //regex that matches only email format
        },
-       thoughts: {
+       thoughts: [{
         type: Schema.Types.ObjectId,
         ref: 'Thought'
-       },
-       friends: {
+       }],
+       friends: [{
         type: Schema.Types.ObjectId,
         ref: 'User'
-       }
+       }]
     }
 )
 
