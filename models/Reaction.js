@@ -24,3 +24,5 @@ const reactionSchema = new Schema({
 function formatDate(date) {
     return date.toLocaleString()
 }
+
+module.exports = reactionSchema;
