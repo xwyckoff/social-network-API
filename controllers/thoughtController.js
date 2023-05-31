@@ -26,7 +26,11 @@ module.exports = {
         try {
             //create a thought and push the ID into the associated user's thoughts array
             const newThought = await Thought.create(req.body);
-            const newUserThought = await User.updateOne({_id: req.body.userId}, {$push: {thoughts: newThought.id}})
+            const newUserThought = await User.findOneAndUpdate(
+                {_id: req.body.userId}, 
+                {$push: {thoughts: newThought.id}},
+                { new: true }
+            )
             res.json({newThought: newThought, userAdded: newUserThought});
         } catch (err) {
             res.status(500).json(err);
