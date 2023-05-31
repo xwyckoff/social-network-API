@@ -35,5 +35,35 @@ module.exports = {
         } catch (err) {
             res.status(500).json(err);
         }
+    },
+
+    async updateThought (req, res) {
+        try {
+            const updatedThought = await Thought.findOneAndUpdate(
+                { _id: req.params.id },
+                { $set: req.body },
+                { new: true }
+            )
+
+            if(!updatedThought) {
+                res.json('Thought does not exist with that ID');
+            }
+            res.json(updatedThought);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+
+    async deleteThought (req, res) {
+        try {
+            const deletedThought = await Thought.findOneAndDelete({ _id: req.params.id });
+            
+            if(!deletedThought) {
+                res.json('Thought does not exist with that ID');
+            }
+            res.json(deletedThought);
+        } catch (err) {
+            res.status(500).json(err);  
+        }
     }
 }
